@@ -1,34 +1,40 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Afazer, { AFazer } from './components/AFazer'
+import AFazerForm from './components/AFazerForm';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [aFazeres, setFazer] = useState([
+    {
+      id: 1,
+      text: "Criar funcionalidade X no sistema",
+      category: "Trabalho",
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      text: "Ir para academia",
+      category: "Pessoal",
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      text: "Estudar react",
+      category: "Estudo",
+      isCompleted: false,
+    },
+  ]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <h1>Lista de tarefas</h1>
+      <div className="afazer-list">
+        {aFazeres.map((aFazer) => (
+          <AFazer aFazer = {aFazer} />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <AFazerForm />
+    </div>
   )
 }
 
