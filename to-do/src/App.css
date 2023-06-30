@@ -8,14 +8,6 @@ body{
   background-size: cover;
 }
 
-.app{
-  max-width: 600px;
-  margin: 0 auto 300px;
-  background-color: white;
-  padding: 20px 30px;
-  border-radius: 12px;
-}
-
 h1{
   text-align: center;
 }
@@ -47,16 +39,41 @@ button:hover{
   opacity: 1;
 }
 
-.aFazerForm{
-  padding-bottom: 1.5rem;
-}
-
 input, select{
   padding: 5px;
   margin-bottom: 10px;
   border: 1px solid #DDD;
   border-radius: 4px;
   width: 100%;
+}
+
+.app{
+  max-width: 600px;
+  margin: 0 auto 300px;
+  background-color: rgb(230, 230, 230);
+  padding: 20px 30px;
+  border-radius: 12px;
+}
+
+.aFazerForm{
+  padding-bottom: 1.5rem;
+}
+
+.aFazer{
+  background-color: #FFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: .3s;
+  text-decoration: line;
+}
+
+.aFazer:hover{
+  transform: scale(1.05);
 }
 
 .complete{
@@ -66,4 +83,10 @@ input, select{
 .remove{
   background-color: #d9534f;
   margin-left: 2px;
+}
+
+.afazer-list{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #555;
 }
