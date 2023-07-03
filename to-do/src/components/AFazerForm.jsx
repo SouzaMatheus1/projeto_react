@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import AFazer from './AFazer';
 
 export const AFazerForm = ({addaFazer}) => {
     const [value,setValue] = useState("");
@@ -11,6 +12,7 @@ export const AFazerForm = ({addaFazer}) => {
       addaFazer(value, category);
       setCategory("");
       setValue("");
+      handleClickButton(AFazer);
     };
 
   return (
@@ -29,7 +31,7 @@ export const AFazerForm = ({addaFazer}) => {
                 <option value="Pessoal">Pessoal</option>
                 <option value="Estudos">Estudos</option>
             </select>
-            <button type="submit">Criar tarefa</button>
+            <button type="submit" onClick={handleSubmit}>Criar tarefa</button>
         </form>
     </div>
   )

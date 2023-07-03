@@ -2,7 +2,9 @@ import { useState } from 'react'
 import Afazer, { AFazer } from './components/AFazer'
 import AFazerForm from './components/AFazerForm';
 import Search from './components/Search';
+import Filter from './components/Filter';
 import './App.css'
+import Axios from "axios"
 
 function App() {
   const [aFazeres, setFazer] = useState([
@@ -12,19 +14,25 @@ function App() {
     //   category: "Trabalho",
     //   isCompleted: false,
     // },
-    // {
-    //   id: 2,
-    //   text: "Ir para academia",
-    //   category: "Pessoal",
-    //   isCompleted: false,
-    // },
-    // {
-    //   id: 3,
-    //   text: "Estudar react",
-    //   category: "Estudo",
-    //   isCompleted: false,
-    // },
   ]);
+
+  const handleChangeValues = (value) => {
+    setValues((prevValue) => ({
+      ...prevValue,
+      [value.target.name]: value.target.value,
+    }));
+  };
+
+  const handleClickButton = (value) => {
+    Axios.post("http://localhost:3001/", {
+      id: values.id,
+      text: values.text,
+      category: values.text,
+      isCompleted: values.isCompleted,
+    }).then((response) => {
+      console.log(response)
+    })
+  }
 
   // Adicionar tarefa
   const addaFazer = (text, category) => {
@@ -57,15 +65,34 @@ function App() {
 
   const [pesquisa, setPesquisa] = useState("");
 
+  const [filter,setFilter] = useState("All");
+  const [sort, setSort] = useState("Asc");
+
   // Tela principal
   return (
     <div className="app">
       <h1>Lista de tarefas</h1>
-      <Search setPesquisa={setPesquisa}/>
-      {console.log(setPesquisa, pesquisa)}
+      {/* Caixa de pesquisa */}
+      <Search search='search' setPesquisa={setPesquisa}/>
+      {/* Filtro */}
+      <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
       <div className="afazer-list">
-        {aFazeres.filter((aFazer) =>
+        {/* Filtro de completas e incompletas */}
+        {aFazeres
+        .filter((aFazer) => 
+          filter === "All" 
+          ? true 
+          : filter === "Completed" 
+          ? aFazer.isCompleted 
+          : !aFazer.isCompleted 
+        )
+        // Filtro de pesquisa por texto
+        .filter((aFazer) =>
           aFazer.text.toLowerCase().includes(pesquisa.toLowerCase()))
+          .sort((a, b) =>
+            sort === "Asc"
+            ? a.text.localeCompare(b.text)
+            : b.text.localeCompare(a.text))
             .map((aFazer) => (
               <AFazer 
                 key={aFazer.id}
@@ -75,6 +102,7 @@ function App() {
               />
             ))
         }
+        {/* Adicionar tarefas à lista */}
       </div>
       <AFazerForm addaFazer={addaFazer} />
     </div>
