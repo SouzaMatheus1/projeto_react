@@ -4,18 +4,39 @@ import AFazerForm from './components/AFazerForm';
 import Search from './components/Search';
 import Filter from './components/Filter';
 import './App.css'
-import Axios from "axios"
+import axios from "axios"
 
 function App() {
   const [aFazeres, setFazer] = useState([
-    // {
-    //   id: 1,
-    //   text: " Criar funcionalidade X no sistema ",
-    //   category: "Trabalho",
-    //   isCompleted: false,
-    // },
+    {
+      id: 1,
+      text: "Criar funcionalidade X no sistema",
+      category: "Trabalho",
+      isCompleted: false,
+    },
   ]);
 
+  // axios.post("/api/register", aFazeres)
+  //   .then(response => {
+  //     console.log(response.data);
+  //     setFazer([...aFazeres, addaFazer]);
+  //   })
+  //     .catch(error =>{
+  //       console.log("ERRO");
+  //       console.error(error)
+  //     });
+
+  // axios.post('/api/register', addaFazer)
+  //     .then(response => {
+  //       console.log('Formulário enviado!');
+  //       console.log(response.data);
+
+  //       setFazer([...aFazeres, addaFazer]);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  
   const handleChangeValues = (value) => {
     setValues((prevValue) => ({
       ...prevValue,
@@ -23,16 +44,16 @@ function App() {
     }));
   };
 
-  const handleClickButton = (value) => {
-    Axios.post("http://localhost:3001/", {
-      id: values.id,
-      text: values.text,
-      category: values.text,
-      isCompleted: values.isCompleted,
-    }).then((response) => {
-      console.log(response)
-    })
-  }
+  // const handleClickButton = (value) => {
+  //   Axios.post("http://localhost:3001/", {
+  //     id: values.id,
+  //     text: values.text,
+  //     category: values.text,
+  //     isCompleted: values.isCompleted,
+  //   }).then((response) => {
+  //     console.log(response)
+  //   })
+  // }
 
   // Adicionar tarefa
   const addaFazer = (text, category) => {

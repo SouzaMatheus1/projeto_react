@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import AFazer from './AFazer';
+import axios from "axios"
 
 export const AFazerForm = ({addaFazer}) => {
     const [value,setValue] = useState("");
@@ -12,7 +13,16 @@ export const AFazerForm = ({addaFazer}) => {
       addaFazer(value, category);
       setCategory("");
       setValue("");
-      handleClickButton(AFazer);
+
+      axios.post("/register", AFazer)
+      .then(response => {
+        console.log(response.data);
+        setFazer([...AFazer, addaFazer]);
+      })
+        .catch(error =>{
+          console.log("ERRO");
+          console.error(error)
+        });
     };
 
   return (
@@ -25,13 +35,19 @@ export const AFazerForm = ({addaFazer}) => {
               placeholder = "Digite o título"
               onChange = {(e) => setValue(e.target.value)}
             />
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select 
+            id = 'categoria_bd'
+            value={category} 
+            onChange={(e) => 
+            setCategory(e.target.value)}>
+
                 <option value="">Selecione uma categoria</option>
                 <option value="Trabalho">Trabalho</option>
                 <option value="Pessoal">Pessoal</option>
                 <option value="Estudos">Estudos</option>
             </select>
-            <button type="submit" onClick={handleSubmit}>Criar tarefa</button>
+            {/* onClick={handleSubmit} */}
+            <button type="submit">Criar tarefa</button>
         </form>
     </div>
   )
